@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: "insert-into-users"
+      author: cotarius
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: testUser
+
+              - column:
+                  name: email
+                  value: test@gmail.com
+
+              - column:
+                  name: telegram_id
+                  value: 1212121225
+
+              - column:
+                  name: username
+                  value: testuser
+
+              - column:
+                  name: password
+                  value: test
+
+              - column:
+                  name: role
+                  value: user

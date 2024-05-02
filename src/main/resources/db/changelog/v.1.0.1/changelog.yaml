@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-tag-1.0.1
+      author: cotarius
+
+
+  - include:
+      file: create-table-reminder.yaml
+      relativeToChangelogFile: true

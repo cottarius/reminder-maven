@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: "add-tag-1.0.0"
+      author: "cotarius"
+
+
+  - include:
+      file: "create-table-user.yaml"
+      relativeToChangelogFile: true

@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-reminder
+      author: cotarius
+      changes:
+        - createTable:
+            tableName: reminder
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: varchar(4096)
+
+              - column:
+                  name: remind
+                  type: timestamp
+
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: user_reminder_fk
+                    referencedTableName: users
+                    referencedColumnNames: id
+                    deleteCascade: true

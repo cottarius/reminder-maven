@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: reminder
+    telegram:
+      botToken: 5982691328:AAFalCNB5LRCPDU-nRxL_-RGxK3tnl5Sz3o
+      chatId: 1212558248
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/reminder_db
+    username: postgres
+    password: postgres
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+
+
+#server:
+#  tomcat:
+#    relaxed-path-chars: \
+#    relaxed-query-chars: \

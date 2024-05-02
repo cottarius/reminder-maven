@@ -1,0 +1,24 @@
+
+databaseChangeLog:
+  - include:
+      file: db/changelog/v.1.0.0/changelog.yaml
+
+  - include:
+      file: v.1.0.1/changelog.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: v.1.0.2/changelog.yaml
+      relativeToChangelogFile: true
+
+
+#<?xml version="1.0" encoding="UTF-8"?>
+#<databaseChangeLog
+#        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+#        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+#        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+#        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+#
+#    <include file="db/changelog/v.1.0.0/changelog.yaml" relativeToChangelogFile="false"/>
+#
+#</databaseChangeLog>
