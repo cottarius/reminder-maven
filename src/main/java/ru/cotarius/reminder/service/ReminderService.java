@@ -18,7 +18,10 @@ public class ReminderService {
     private final ReminderRepository reminderRepository;
     private final TelegramBot telegramBot;
 
-    public List<Reminder> findByUserId(Long userId) {
+    public List<Reminder> findByUserId(Long userId, String keyword) {
+        if (keyword != null) {
+            return reminderRepository.search(keyword);
+        }
         return reminderRepository.findByUserId(userId);
     }
 

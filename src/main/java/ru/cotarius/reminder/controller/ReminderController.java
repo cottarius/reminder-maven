@@ -2,6 +2,7 @@ package ru.cotarius.reminder.controller;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,9 +33,10 @@ public class ReminderController {
     }
 
     @GetMapping("/index")
-    public String getReminds(Principal principal, Model model) {
+    public String getReminds(Principal principal, Model model, @Param("keyword") String keyword) {
         User user = userService.findByUsername(principal.getName());
-        List<Reminder> reminds = reminderService.findByUserId(user.getId());
+        List<Reminder> reminds = reminderService.findByUserId(user.getId(), keyword);
+        model.addAttribute("keyword", keyword);
         model.addAttribute("reminds", reminds);
         model.addAttribute("user", user);
         return "index";
