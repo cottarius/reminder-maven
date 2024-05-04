@@ -23,6 +23,9 @@ public class Reminder {
     @Column(name = "remind")
     private LocalDateTime remind;
 
+    @Column(name = "is_reminded")
+    private boolean isReminded;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

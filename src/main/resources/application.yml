@@ -1,13 +1,11 @@
 spring:
   application:
+    botToken: 5982691328:AAFalCNB5LRCPDU-nRxL_-RGxK3tnl5Sz3o
     name: reminder
-    telegram:
-      botToken: 5982691328:AAFalCNB5LRCPDU-nRxL_-RGxK3tnl5Sz3o
-      chatId: 1212558248
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/reminder_db
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
 
@@ -15,9 +13,6 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-
-
-
 #server:
 #  tomcat:
 #    relaxed-path-chars: \

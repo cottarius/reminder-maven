@@ -1,11 +1,14 @@
 package ru.cotarius.reminder.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import ru.cotarius.reminder.entity.Reminder;
 import ru.cotarius.reminder.repository.ReminderRepository;
-import ru.cotarius.reminder.telegram.TelegramSender;
+import ru.cotarius.reminder.telegram.TelegramBot;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -13,7 +16,7 @@ import java.util.List;
 public class ReminderService {
 
     private final ReminderRepository reminderRepository;
-    private final TelegramSender telegramSender;
+    private final TelegramBot telegramBot;
 
     public List<Reminder> findByUserId(Long userId) {
         return reminderRepository.findByUserId(userId);
@@ -51,8 +54,20 @@ public class ReminderService {
         return reminderRepository.findById(id).orElse(null);
     }
 
-    public void sendTelegramMessage(Long userId, Reminder reminder) {
-
+    @Scheduled(fixedRate = 60000)
+    @Transactional
+    public void checkAndSendReminder() {
+        LocalDateTime now = LocalDateTime.now();
+        List<Reminder> dueReminders = reminderRepository.findByRemindBefore(now);
+        for (Reminder reminder: dueReminders) {
+            if (!reminder.isReminded()) {
+                String message = String.format("Напоминание: %s\n%s",
+                        reminder.getTitle(),
+                        reminder.getDescription());
+                telegramBot.sendMessage(message, String.valueOf(reminder.getUser().getTelegramId()));
+                reminder.setReminded(true);
+            }
+        }
     }
 
 //    public Reminder findByDate(LocalDate date) {

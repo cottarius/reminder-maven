@@ -29,6 +29,12 @@ databaseChangeLog:
                   type: timestamp
 
               - column:
+                  name: is_reminded
+                  type: boolean
+                  constraints:
+                    nullable: false
+
+              - column:
                   name: user_id
                   type: bigint
                   constraints:

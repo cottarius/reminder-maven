@@ -1,10 +1,12 @@
 package ru.cotarius.reminder.controller;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.cotarius.reminder.entity.Reminder;
 import ru.cotarius.reminder.entity.User;
 import ru.cotarius.reminder.service.ReminderService;
@@ -78,17 +80,17 @@ public class ReminderController {
         return "redirect:/index";
     }
 
-//    @GetMapping("/user/new")
-//    public String newUserForm(Model model) {
-//        User user = new User();
-//        model.addAttribute("user", user);
-//        return "registration";
-//    }
+    @GetMapping("/user/new")
+    public String newUserForm(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "registration";
+    }
 
-//    @RequestMapping(value = "/register",method = RequestMethod.POST)
-//    public String register(@ModelAttribute("user") User user, Model model) {
-//        userService.saveUser(user);
-//        return "login111";
-//    }
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public String register(@ModelAttribute("user") User user, Model model) {
+        userService.saveUser(user);
+        return "/login";
+    }
 
 }
