@@ -20,10 +20,12 @@
             <input type="text" th:field="*{description}"/>
         </label></p>
         <p>Remind date: <label>
-            <input type="text" th:field="*{remind}"/>
+            <input type="datetime-local" th:field="*{remind}"/>
         </label></p>
         <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+        <a href="/index">Back</a>
     </form>
 </div>
+
 </body>
 </html>
