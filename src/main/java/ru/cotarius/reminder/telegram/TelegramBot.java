@@ -36,7 +36,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         sendMessage.setText(message);
         try {
             execute(sendMessage);
-            log.atLevel(Level.INFO).log("Message sent");
+            log.atLevel(Level.INFO).log("Message sent to telegram");
         } catch (TelegramApiException e) {
             log.atLevel(Level.WARN).log("Error while sending message: " + e.getMessage());
         }

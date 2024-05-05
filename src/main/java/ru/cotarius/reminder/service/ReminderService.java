@@ -17,6 +17,7 @@ public class ReminderService {
 
     private final ReminderRepository reminderRepository;
     private final TelegramBot telegramBot;
+    private final MyEmailService myEmailService;
 
     public List<Reminder> findByUserId(Long userId, String keyword) {
         if (keyword != null) {
@@ -62,12 +63,15 @@ public class ReminderService {
     public void checkAndSendReminder() {
         LocalDateTime now = LocalDateTime.now();
         List<Reminder> dueReminders = reminderRepository.findByRemindBefore(now);
-        for (Reminder reminder: dueReminders) {
+        for (Reminder reminder : dueReminders) {
             if (!reminder.isReminded()) {
                 String message = String.format("Напоминание: %s\n%s",
                         reminder.getTitle(),
                         reminder.getDescription());
                 telegramBot.sendMessage(message, String.valueOf(reminder.getUser().getTelegramId()));
+                myEmailService.sendSimpleEmail(reminder.getUser().getEmail(),
+                        reminder.getTitle(),
+                        reminder.getDescription());
                 reminder.setReminded(true);
             }
         }
