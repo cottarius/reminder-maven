@@ -8,12 +8,11 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: bigserial
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
-
               - column:
                   name: name
                   type: varchar(255)
@@ -22,23 +21,19 @@ databaseChangeLog:
               - column:
                   name: email
                   type: varchar(255)
-
               - column:
                   name: telegram_id
-                  type: int
-
+                  type: bigint
               - column:
                   name: username
                   type: varchar(255)
                   constraints:
                     nullable: false
-
               - column:
                   name: password
                   type: varchar(255)
                   constraints:
                     nullable: false
-
               - column:
                   name: role
                   type: varchar(32)

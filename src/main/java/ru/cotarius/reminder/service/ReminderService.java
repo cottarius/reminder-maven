@@ -6,7 +6,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import ru.cotarius.reminder.entity.Reminder;
 import ru.cotarius.reminder.repository.ReminderRepository;
-import ru.cotarius.reminder.telegram.TelegramBot;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
 public class ReminderService {
 
     private final ReminderRepository reminderRepository;
-    private final TelegramBot telegramBot;
+    private final TelegramBotService telegramBot;
     private final MyEmailService myEmailService;
 
     public List<Reminder> findByUserId(Long userId, String keyword) {
@@ -42,18 +41,6 @@ public class ReminderService {
         reminderRepository.save(myReminder);
     }
 
-    public Reminder findByTitle(String title) {
-        return reminderRepository.findReminderByTitle(title);
-    }
-
-    public Reminder findByDescription(String description) {
-        return reminderRepository.findReminderByDescription(description);
-    }
-
-    public List<Reminder> findAll() {
-        return reminderRepository.findAll();
-    }
-
     public Reminder findById(Long id) {
         return reminderRepository.findById(id).orElse(null);
     }
@@ -76,12 +63,4 @@ public class ReminderService {
             }
         }
     }
-
-//    public Reminder findByDate(LocalDate date) {
-//        return reminderRepository.findReminderByDate(date);
-//    }
-//
-//    public Reminder findByTime(LocalTime time) {
-//        return reminderRepository.findReminderByTime(time);
-//    }
 }

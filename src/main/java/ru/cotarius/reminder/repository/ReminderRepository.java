@@ -11,10 +11,6 @@ import java.util.List;
 @Repository
 public interface ReminderRepository extends JpaRepository<Reminder, Long> {
 
-    Reminder findReminderByTitle(String title);
-
-    Reminder findReminderByDescription(String description);
-
     List<Reminder> findByUserId(Long userId);
 
     Reminder findById(long id);

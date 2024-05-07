@@ -2,11 +2,6 @@ package ru.cotarius.reminder.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -34,6 +29,4 @@ public class User{
 
     @Column(name = "role")
     private String role;
-
-
 }

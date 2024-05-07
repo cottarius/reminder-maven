@@ -1,7 +1,5 @@
-package ru.cotarius.reminder.config;
+package ru.cotarius.reminder.service;
 
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
