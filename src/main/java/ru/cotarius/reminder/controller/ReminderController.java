@@ -1,13 +1,12 @@
 package ru.cotarius.reminder.controller;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import ru.cotarius.reminder.entity.Reminder;
 import ru.cotarius.reminder.entity.User;
 import ru.cotarius.reminder.service.ReminderService;
@@ -17,13 +16,17 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/remind")
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class ReminderController {
     private final ReminderService reminderService;
     private final UserService userService;
 
-//    @RequestMapping(value = "/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    @Autowired
+    public ReminderController(ReminderService reminderService, UserService userService) {
+        this.reminderService = reminderService;
+        this.userService = userService;
+    }
+
     @GetMapping("/delete/{id}")
     @DeleteMapping("/delete/{id}")
     public String deleteReminder(@PathVariable long id, Model model) {
@@ -42,14 +45,6 @@ public class ReminderController {
         return "index";
     }
 
-//    @RequestMapping("/")
-//    public ModelAndView home() {
-//        List<Customer> listCustomer = customerService.listAll();
-//        ModelAndView mav = new ModelAndView("index");
-//        mav.addObject("listCustomer", listCustomer);
-//        return mav;
-//    }
-
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable long id, Model model){
         Reminder reminder = reminderService.findById(id);
@@ -58,12 +53,13 @@ public class ReminderController {
     }
 
     @PutMapping("/edit/{id}")
-    public String updateReminder(@PathVariable long id, @ModelAttribute Reminder reminder, BindingResult bindingResult){
+    public String updateReminder(@PathVariable long id,
+                                 @ModelAttribute Reminder reminder,
+                                 BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             reminder.setId(id);
             return "edit-remind";
         }
-
         reminderService.update(id, reminder);
         return "redirect:/index";
     }
@@ -74,6 +70,7 @@ public class ReminderController {
         model.addAttribute("reminder", reminder);
         return "new_remind";
     }
+
     @PostMapping(value = "/save")
     public String saveRemind(@ModelAttribute("reminder") Reminder reminder, Principal principal) {
         User user = userService.findByUsername(principal.getName());
@@ -81,18 +78,4 @@ public class ReminderController {
         reminderService.save(reminder);
         return "redirect:/index";
     }
-
-    @GetMapping("/user/new")
-    public String newUserForm(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "registration";
-    }
-
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public String register(@ModelAttribute("user") User user, Model model) {
-        userService.saveUser(user);
-        return "/login";
-    }
-
 }

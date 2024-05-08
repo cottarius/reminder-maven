@@ -1,4 +1,4 @@
-package ru.cotarius.reminder.telegram;
+package ru.cotarius.reminder.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.event.Level;
@@ -13,10 +13,10 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
 @Slf4j
-public class TelegramBot extends TelegramLongPollingBot {
+public class TelegramBotService extends TelegramLongPollingBot {
 
     @Autowired
-    public TelegramBot(@Value("${spring.application.botToken}") String botToken) {
+    public TelegramBotService(@Value("${spring.application.botToken}") String botToken) {
         super(botToken);
     }
 

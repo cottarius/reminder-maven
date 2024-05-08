@@ -1,4 +1,4 @@
-package ru.cotarius.reminder.config;
+package ru.cotarius.reminder.service;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,8 +7,6 @@ import ru.cotarius.reminder.entity.User;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
-
 
 public class MyUserDetails implements UserDetails {
 
