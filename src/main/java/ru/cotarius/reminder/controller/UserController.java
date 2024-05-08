@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.cotarius.reminder.entity.User;
 import ru.cotarius.reminder.service.UserService;
@@ -29,5 +30,11 @@ public class UserController {
         user.setRole("user");
         userService.saveUser(user);
         return "redirect:/";
+    }
+    @GetMapping("/user/{id}")
+    public String getUserForm(@PathVariable long id, Model model) {
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "index";
     }
 }

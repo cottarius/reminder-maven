@@ -14,7 +14,7 @@ services:
     volumes:
       - ./db/postgresql:/var/lib/postgresql
   app:
-    image: 'cotarius/reminder:0.0.7'
+    image: 'cotarius/reminder:0.0.8'
     ports:
       - "8080:8080"
     volumes:

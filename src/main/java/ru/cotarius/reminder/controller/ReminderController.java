@@ -1,6 +1,7 @@
 package ru.cotarius.reminder.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +16,16 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class ReminderController {
     private final ReminderService reminderService;
     private final UserService userService;
+
+    @Autowired
+    public ReminderController(ReminderService reminderService, UserService userService) {
+        this.reminderService = reminderService;
+        this.userService = userService;
+    }
 
     @GetMapping("/delete/{id}")
     @DeleteMapping("/delete/{id}")
