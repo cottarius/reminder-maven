@@ -8,7 +8,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: bigserial
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
@@ -25,13 +25,14 @@ databaseChangeLog:
 
               - column:
                   name: telegram_id
-                  type: int
+                  type: bigint
 
               - column:
                   name: username
                   type: varchar(255)
                   constraints:
                     nullable: false
+                    unique: true
 
               - column:
                   name: password

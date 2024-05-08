@@ -39,6 +39,7 @@ public class ReminderService {
         myReminder.setTitle(reminder.getTitle());
         myReminder.setDescription(reminder.getDescription());
         myReminder.setRemind(reminder.getRemind());
+        myReminder.setReminded(false);
         reminderRepository.save(myReminder);
     }
 

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.cotarius.reminder.entity.Role;
 import ru.cotarius.reminder.entity.User;
 import ru.cotarius.reminder.service.UserService;
 
@@ -27,7 +28,7 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String registerUser(@ModelAttribute("user") User user) {
-        user.setRole("user");
+        user.setRole(Role.USER);
         userService.saveUser(user);
         return "redirect:/";
     }

@@ -28,4 +28,4 @@ databaseChangeLog:
 
               - column:
                   name: role
-                  value: user
+                  value: USER
