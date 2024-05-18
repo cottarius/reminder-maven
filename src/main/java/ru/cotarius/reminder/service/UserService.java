@@ -2,6 +2,7 @@ package ru.cotarius.reminder.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import ru.cotarius.reminder.entity.User;
@@ -11,8 +12,12 @@ import ru.cotarius.reminder.repository.UserRepository;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public User saveUser (User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEmail(passwordEncoder.encode(user.getEmail()));
+        user.setTelegramId(passwordEncoder.encode(user.getTelegramId()));
         return userRepository.save(user);
     }
 

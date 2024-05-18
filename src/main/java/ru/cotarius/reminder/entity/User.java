@@ -19,7 +19,7 @@ public class User{
     private String email;
 
     @Column(name = "telegram_id")
-    private int telegramId;
+    private String telegramId;
 
     @Column(name = "username")
     private String username;

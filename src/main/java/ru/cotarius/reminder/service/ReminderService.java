@@ -3,6 +3,7 @@ package ru.cotarius.reminder.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.cotarius.reminder.entity.Reminder;
 import ru.cotarius.reminder.repository.ReminderRepository;
@@ -17,6 +18,7 @@ public class ReminderService {
     private final ReminderRepository reminderRepository;
     private final TelegramBotService telegramBot;
     private final MyEmailService myEmailService;
+    private final PasswordEncoder passwordEncoder;
 
     public List<Reminder> findByUserId(Long userId, String keyword) {
         if (keyword != null) {
@@ -29,7 +31,7 @@ public class ReminderService {
         return reminderRepository.save(reminder);
     }
 
-    public void delete(Reminder reminder) {
+    public void delete( Reminder reminder) {
         reminderRepository.delete(reminder);
     }
 
@@ -56,7 +58,7 @@ public class ReminderService {
                 String message = String.format("Напоминание: %s\n%s",
                         reminder.getTitle(),
                         reminder.getDescription());
-                telegramBot.sendMessage(message, String.valueOf(reminder.getUser().getTelegramId()));
+                telegramBot.sendMessage(message, reminder.getUser().getTelegramId());
                 myEmailService.sendSimpleEmail(reminder.getUser().getEmail(),
                         reminder.getTitle(),
                         reminder.getDescription());
