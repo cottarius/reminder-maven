@@ -3,6 +3,19 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>New Remind</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('/registration.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+
 </head>
 <body>
 <div align="center">
@@ -13,12 +26,15 @@
         </label></p>
         <p>Email: <label>
             <input type="text" th:field="*{email}" />
+            <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
         </label></p>
         <p>Login: <label>
             <input type="text" th:field="*{username}" />
+            <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</div>
         </label></p>
         <p>Password: <label>
             <input type="password" th:field="*{password}" />
+            <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
         </label></p>
         <p>Telegram ID: <label>
             <input type="text" th:field="*{telegramId}" />
@@ -27,6 +43,5 @@
         <a href="/login">Back</a>
     </form>
 </div>
-
 </body>
 </html>

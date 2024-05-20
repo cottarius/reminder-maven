@@ -16,8 +16,8 @@ public class UserService {
 
     public User saveUser (User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setEmail(passwordEncoder.encode(user.getEmail()));
-        user.setTelegramId(passwordEncoder.encode(user.getTelegramId()));
+//        user.setEmail(passwordEncoder.encode(user.getEmail()));
+//        user.setTelegramId(passwordEncoder.encode(user.getTelegramId()));
         return userRepository.save(user);
     }
 
