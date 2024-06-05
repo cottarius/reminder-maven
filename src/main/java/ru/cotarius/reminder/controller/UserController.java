@@ -42,6 +42,6 @@ public class UserController {
     public String getUserForm(@PathVariable long id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("user", user);
-        return "index";
+        return "reminds";
     }
 }

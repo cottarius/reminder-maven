@@ -16,43 +16,36 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class ReminderController {
     private final ReminderService reminderService;
     private final UserService userService;
 
-    @Autowired
-    public ReminderController(ReminderService reminderService, UserService userService) {
-        this.reminderService = reminderService;
-        this.userService = userService;
-    }
-
-    @GetMapping("/delete/{id}")
-    @DeleteMapping("/delete/{id}")
-    public String deleteReminder(@PathVariable long id, Model model) {
+    @GetMapping("/reminds/{id}")
+    public String deleteReminder(@PathVariable Long id, Model model) {
         Reminder reminder = reminderService.findById(id);
         reminderService.delete(reminder);
-        return "redirect:/index";
+        return "redirect:/reminds";
     }
 
-    @GetMapping("/index")
+    @GetMapping("/reminds")
     public String getReminds(Principal principal, Model model, @Param("keyword") String keyword) {
         User user = userService.findByUsername(principal.getName());
         List<Reminder> reminds = reminderService.findByUserId(user.getId(), keyword);
         model.addAttribute("keyword", keyword);
         model.addAttribute("reminds", reminds);
         model.addAttribute("user", user);
-        return "index";
+        return "reminds";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/reminds/edit/{id}")
     public String showUpdateForm(@PathVariable long id, Model model){
         Reminder reminder = reminderService.findById(id);
         model.addAttribute("reminder", reminder);
         return "edit-remind";
     }
 
-    @PutMapping("/edit/{id}")
+    @PostMapping("/reminds/{id}")
     public String updateReminder(@PathVariable long id,
                                  @ModelAttribute Reminder reminder,
                                  BindingResult bindingResult){
@@ -61,21 +54,21 @@ public class ReminderController {
             return "edit-remind";
         }
         reminderService.update(id, reminder);
-        return "redirect:/index";
+        return "redirect:/reminds";
     }
 
-    @GetMapping("/remind/new")
+    @GetMapping("/reminds/new")
     public String newRemindForm(Model model) {
         Reminder reminder = new Reminder();
         model.addAttribute("reminder", reminder);
         return "new_remind";
     }
 
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/reminds")
     public String saveRemind(@ModelAttribute("reminder") Reminder reminder, Principal principal) {
         User user = userService.findByUsername(principal.getName());
         reminder.setUser(user);
         reminderService.save(reminder);
-        return "redirect:/index";
+        return "redirect:/reminds";
     }
 }

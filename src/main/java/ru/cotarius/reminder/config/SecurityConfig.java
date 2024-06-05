@@ -42,7 +42,7 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/index", true)
+                        .defaultSuccessUrl("/reminds", true)
                         .permitAll())
                 .logout((logout) -> logout
                         .logoutUrl("/logout")

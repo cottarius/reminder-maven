@@ -37,6 +37,7 @@ public class ReminderService {
 
     public void update(long id, Reminder reminder) {
         Reminder myReminder = reminderRepository.findById(id);
+        myReminder.setId(id);
         myReminder.setTitle(reminder.getTitle());
         myReminder.setDescription(reminder.getDescription());
         myReminder.setRemind(reminder.getRemind());
