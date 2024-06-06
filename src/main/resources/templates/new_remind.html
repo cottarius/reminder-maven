@@ -51,40 +51,40 @@
             <div class="card-body">
                 <form th:action="@{/reminds}" th:object="${reminder}" method="post">
                     <div class="form-group">
-                        <label> Title of Remind </label>
+                        <label> Title </label>
                         <label>
                             <input
                                     type="text"
                                     name="title"
                                     th:field="*{title}"
                                     class="form-control"
-                                    placeholder="Enter Title of Remind"
+                                    placeholder="Enter Title"
                             />
                         </label>
                     </div>
 
                     <div class="form-group">
-                        <label> Description of Remind </label>
+                        <label> Description </label>
                         <label>
                             <input
                                     type="text"
                                     name="description"
                                     th:field="*{description}"
                                     class="form-control"
-                                    placeholder="Enter Description of Remind"
+                                    placeholder="Enter Description"
                             />
                         </label>
                     </div>
 
                     <div class="form-group">
-                        <label> Date and time of Remind </label>
+                        <label> Date and time </label>
                         <label>
                             <input
                                     type="datetime-local"
                                     name="remind date time"
                                     th:field="*{remind}"
                                     class="form-control"
-                                    placeholder="Enter Date and Time of Remind"
+                                    placeholder="Enter Date and Time"
                             />
                         </label>
                     </div>
