@@ -3,6 +3,8 @@ package ru.cotarius.reminder.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -70,5 +72,27 @@ public class ReminderController {
         reminder.setUser(user);
         reminderService.save(reminder);
         return "redirect:/reminds";
+    }
+
+    /**
+     * после google-авторизации юзера достаётся список заметок юзера и передаётся в html-страницу вместе с юзером
+     * @param principal пользователь из google-авторизации
+     * @param model
+     * @param keyword
+     * @return
+     */
+    @GetMapping("/oauth2LoginSuccess")
+    public String oauth2LoginSuccess(@AuthenticationPrincipal OAuth2User principal, Model model, @Param("keyword") String keyword) {
+        // Используйте данные, полученные из Google, для отображения информации о пользователе
+        String googleId = principal.getAttribute("sub");
+        String email = principal.getAttribute("email");
+
+        User user = userService.findByGoogleIdOrCreateNew(googleId, email);
+
+        List<Reminder> reminds = reminderService.findByUserId(user.getId(), keyword);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("reminds", reminds);
+        model.addAttribute("user", user);
+        return "reminds"; // имя HTML-шаблона, который вы хотите отобразить
     }
 }

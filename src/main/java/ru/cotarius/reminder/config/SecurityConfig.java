@@ -40,6 +40,10 @@ public class SecurityConfig {
                         .requestMatchers("/registration**").permitAll()
                         .anyRequest().authenticated()
                 )
+                // добавлено после внедрения бибилиотеки oauth2
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/oauth2LoginSuccess", true))
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/reminds", true)

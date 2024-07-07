@@ -13,3 +13,19 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 105117623295-9n3bd4job49hggm6jl198jufqta8372b.apps.googleusercontent.com
+            client-secret: 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
+            scope: openid, profile, email
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+            user-name-attribute: sub

@@ -24,6 +24,11 @@ databaseChangeLog:
                   constraints:
                     unique: true
               - column:
+                  name: google_id
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+              - column:
                   name: telegram_id
                   type: varchar(255)
                   constraints:
@@ -37,8 +42,8 @@ databaseChangeLog:
               - column:
                   name: password
                   type: varchar(255)
-                  constraints:
-                    nullable: false
+#                  constraints:
+#                    nullable: false
               - column:
                   name: role
                   type: varchar(32)

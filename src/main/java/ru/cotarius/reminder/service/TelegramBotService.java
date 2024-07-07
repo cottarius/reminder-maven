@@ -32,13 +32,15 @@ public class TelegramBotService extends TelegramLongPollingBot {
 
     public void sendMessage(String message, String chatID){
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatID);
-        sendMessage.setText(message);
-        try {
-            execute(sendMessage);
-            log.atLevel(Level.INFO).log("Message sent to telegram");
-        } catch (TelegramApiException e) {
-            log.atLevel(Level.WARN).log("Error while sending message: " + e.getMessage());
+        if (chatID != null) {
+            sendMessage.setChatId(chatID);
+            sendMessage.setText(message);
+            try {
+                execute(sendMessage);
+                log.atLevel(Level.INFO).log("Message sent to telegram");
+            } catch (TelegramApiException e) {
+                log.atLevel(Level.WARN).log("Error while sending message: " + e.getMessage());
+            }
         }
     }
 }

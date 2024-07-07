@@ -25,6 +25,9 @@ public class User{
     @Column(name = "email")
     private String email;
 
+    @Column(name = "google_id")
+    private String googleId;
+
     @Column(name = "telegram_id")
     private String telegramId;
 
@@ -32,7 +35,7 @@ public class User{
     @Column(name = "username")
     private String username;
 
-    @NotEmpty(message = "password should not be empty")
+//    @NotEmpty(message = "password should not be empty")
     @Column(name = "password")
     private String password;
 
